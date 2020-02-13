@@ -1,5 +1,6 @@
 package com.andis.score.controller;
 
+import com.andis.score.controller.dto.ScoreDto;
 import com.andis.score.service.ScoreCalculationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,11 @@ public class ScoreController {
     }
 
     @GetMapping
-    public ResponseEntity<Integer> calculateScore(@RequestParam String keyword) {
+    public ResponseEntity<ScoreDto> calculateScore(@RequestParam String keyword) {
         return ResponseEntity.ok(
-                service.getScore(keyword)
-        );
+                new ScoreDto(
+                        keyword,
+                        service.getScore(keyword)
+                ));
     }
 }
